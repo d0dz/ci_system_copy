@@ -6,7 +6,7 @@ class Schools extends CI_Controller{
 		parent::__construct();
 		$this->load->model('school_model');
 
-		if(!$this->session->userdata('logged_in')){
+		if($this->session->userdata('mem_status')!='1'){
 			redirect('auth/index');
 		}
 
@@ -14,23 +14,11 @@ class Schools extends CI_Controller{
 
 	function index(){
 
-		// if($this->session->userdata('mem_id')){
-
-		// }else{
-		// 	redirect('members/login');
-		// }
-
 		$data['schools']=$this->school_model->get_schools();
 		$this->load->view('schools/index',$data);
 	}
 
 	function school($sc_id){
-
-		// if($this->session->userdata('mem_id')){
-
-		// }else{
-		// 	redirect('members/login');
-		// }
 
 		$data['school']=$this->school_model->get_school($sc_id);
 		$this->load->view('schools/school',$data);
@@ -38,61 +26,113 @@ class Schools extends CI_Controller{
 
 	function new_school(){
 
-		// if($this->session->userdata('mem_id')){
-
-		// }else{
-		// 	redirect('members/login');
-		// }
-
-		// echo var_dump($_POST);
 		if(!empty($_POST)){
-			$data=array(
-				'sc_name'=>$_POST['sc_name'],
-				'sc_address'=>$_POST['sc_address'],
-				'sc_tel'=>$_POST['sc_tel']
-			);
-			$this->db->set('crt_date', 'NOW()', FALSE);
-			$this->school_model->insert($data);
-			redirect("schools","refresh");
+
+			$this->load->library('form_validation');
+			$frm = $this->form_validation;
+
+			$config=array(
+				array(
+					'field'=>'sc_name',
+					'label'=>'ชื่อโรงเรียน',
+					'rules'=>'trim|required|min_length[3]'
+					),
+				array(
+					'field'=>'sc_address',
+					'label'=>'ที่อยู่โรงเรียน',
+					'rules'=>'trim|required|min_length[3]'
+					),
+				array(
+					'field'=>'sc_tel',
+					'label'=>'เบอร์โทรศัพท์',
+					'rules'=>'trim|numeric|required|min_length[9]|max_length[11]'
+					)
+				);
+			$frm->set_rules($config);
+			$frm->set_message("trim","กรุณากรอกข้อมูล  %s");
+			$frm->set_message("required","กรุณากรอกข้อมูล  %s");
+			$frm->set_message("numeric","กรุณากรอกข้อมูลเบอร์โทรเป็นตัวเลขเท่านั้น ");
+			$frm->set_message("valid_email","กรุณากรอกอีเมลล์ให้ถูกต้อง เช่น   monXX@hotmail.com");
+			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("greater_than","กรุณาเลือก %s ");
+
+			if ($frm->run()==false){
+				$data['errors']=validation_errors();
+			}else{
+				$data=array(
+					'sc_name'=>$_POST['sc_name'],
+					'sc_address'=>$_POST['sc_address'],
+					'sc_tel'=>$_POST['sc_tel']
+					);
+				$this->db->set('crt_date', 'NOW()', FALSE);
+				$this->school_model->insert($data);
+				redirect("schools","refresh");
+			}
 		}else{
-			// echo "error";
-			// redirect("students","refresh");
-			$this->load->view('schools/new_school');
+			$data = array('errors'=>false);
 		}
+
+		$this->load->view('schools/new_school',$data);
+		
 	}
 
 	function edit($sc_id){
 
-		// if($this->session->userdata('mem_id')){
-
-		// }else{
-		// 	redirect('members/login');
-		// }
-
-		$data['success']=0;
+		
 		if($_POST){
-			$data=array(
-				'sc_name'=>$_POST['sc_name'],
-				'sc_address'=>$_POST['sc_address'],
-				'sc_tel'=>$_POST['sc_tel']
-			);
-			$this->db->set('crt_date', 'NOW()', FALSE);
-			$this->school_model->update($sc_id,$data);
-			$data['success']=1;
-			
+
+				$this->load->library('form_validation');
+			$frm = $this->form_validation;
+
+			$config=array(
+				array(
+					'field'=>'sc_name',
+					'label'=>'ชื่อโรงเรียน',
+					'rules'=>'trim|required|min_length[3]'
+					),
+				array(
+					'field'=>'sc_address',
+					'label'=>'ที่อยู่โรงเรียน',
+					'rules'=>'trim|required|min_length[3]'
+					),
+				array(
+					'field'=>'sc_tel',
+					'label'=>'เบอร์โทรศัพท์',
+					'rules'=>'trim|numeric|required|min_length[9]|max_length[11]'
+					)
+				);
+			$frm->set_rules($config);
+			$frm->set_message("trim","กรุณากรอกข้อมูล  %s");
+			$frm->set_message("required","กรุณากรอกข้อมูล  %s");
+			$frm->set_message("numeric","กรุณากรอกข้อมูลเบอร์โทรเป็นตัวเลขเท่านั้น ");
+			$frm->set_message("valid_email","กรุณากรอกอีเมลล์ให้ถูกต้อง เช่น   monXX@hotmail.com");
+			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("greater_than","กรุณาเลือก %s ");
+
+			if ($frm->run()==false){
+				$data['errors']=validation_errors();
+			}else{
+				$data=array(
+					'sc_name'=>$_POST['sc_name'],
+					'sc_address'=>$_POST['sc_address'],
+					'sc_tel'=>$_POST['sc_tel']
+					);
+				$this->db->set('crt_date', 'NOW()', FALSE);
+				$this->school_model->insert($data);
+				redirect("schools","refresh");
+			}
+		}else{
+			$data = array('errors'=>false);
 		}
+
 		$data['school']=$this->school_model->get_school($sc_id);
 		$this->load->view('schools/edit_school',$data);
 		
 	}
 
 	function delete($sc_id){
-
-		// if($this->session->userdata('mem_id')){
-
-		// }else{
-		// 	redirect('members/login');
-		// }
 
 		$this->school_model->delete($sc_id);
 		redirect(base_url().'schools');

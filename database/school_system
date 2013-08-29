@@ -1,0 +1,1420 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.4
+-- Dumped by pg_dump version 9.2.4
+-- Started on 2013-08-29 10:04:09 ICT
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 201 (class 3079 OID 11995)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2337 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 168 (class 1259 OID 16620)
+-- Name: sc_class; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_class (
+    class_id integer NOT NULL,
+    class_name character(80)
+);
+
+
+ALTER TABLE public.sc_class OWNER TO postgres;
+
+--
+-- TOC entry 169 (class 1259 OID 16623)
+-- Name: sc_class_class_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_class_class_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_class_class_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2338 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: sc_class_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_class_class_id_seq OWNED BY sc_class.class_id;
+
+
+--
+-- TOC entry 170 (class 1259 OID 16625)
+-- Name: sc_fee; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_fee (
+    fee_id integer NOT NULL,
+    fee_name character(1),
+    fee_amount integer NOT NULL,
+    sc_id integer NOT NULL,
+    crt_by integer NOT NULL,
+    crt_date integer NOT NULL,
+    "Fee_defalt" character varying(10)
+);
+
+
+ALTER TABLE public.sc_fee OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 16628)
+-- Name: sc_fee_crt_by_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_fee_crt_by_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_fee_crt_by_seq OWNER TO postgres;
+
+--
+-- TOC entry 2339 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: sc_fee_crt_by_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_fee_crt_by_seq OWNED BY sc_fee.crt_by;
+
+
+--
+-- TOC entry 172 (class 1259 OID 16630)
+-- Name: sc_fee_crt_date_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_fee_crt_date_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_fee_crt_date_seq OWNER TO postgres;
+
+--
+-- TOC entry 2340 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: sc_fee_crt_date_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_fee_crt_date_seq OWNED BY sc_fee.crt_date;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16632)
+-- Name: sc_fee_fee_amount_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_fee_fee_amount_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_fee_fee_amount_seq OWNER TO postgres;
+
+--
+-- TOC entry 2341 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: sc_fee_fee_amount_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_fee_fee_amount_seq OWNED BY sc_fee.fee_amount;
+
+
+--
+-- TOC entry 174 (class 1259 OID 16634)
+-- Name: sc_fee_fee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_fee_fee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_fee_fee_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2342 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: sc_fee_fee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_fee_fee_id_seq OWNED BY sc_fee.fee_id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16636)
+-- Name: sc_fee_sc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_fee_sc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_fee_sc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2343 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: sc_fee_sc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_fee_sc_id_seq OWNED BY sc_fee.sc_id;
+
+
+--
+-- TOC entry 176 (class 1259 OID 16638)
+-- Name: sc_member; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_member (
+    mem_id integer NOT NULL,
+    mem_user character varying(10),
+    mem_pass character varying(128),
+    mem_name character varying(50),
+    mem_email character varying(100),
+    mem_tel character varying(20),
+    mem_status character(1),
+    crt_by integer NOT NULL,
+    crt_date date,
+    sc_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sc_member OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16641)
+-- Name: sc_member_crt_by_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_member_crt_by_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_member_crt_by_seq OWNER TO postgres;
+
+--
+-- TOC entry 2344 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: sc_member_crt_by_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_member_crt_by_seq OWNED BY sc_member.crt_by;
+
+
+--
+-- TOC entry 178 (class 1259 OID 16643)
+-- Name: sc_member_mem_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_member_mem_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_member_mem_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2345 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: sc_member_mem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_member_mem_id_seq OWNED BY sc_member.mem_id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 16645)
+-- Name: sc_member_sc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_member_sc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_member_sc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2346 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: sc_member_sc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_member_sc_id_seq OWNED BY sc_member.sc_id;
+
+
+--
+-- TOC entry 180 (class 1259 OID 16647)
+-- Name: sc_order; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_order (
+    order_id integer NOT NULL,
+    order_amount integer NOT NULL,
+    order_date date,
+    order_qty integer NOT NULL,
+    order_status character(1),
+    std_id integer NOT NULL,
+    fee_id integer NOT NULL,
+    pay_id integer NOT NULL,
+    crt_by integer NOT NULL,
+    crt_date date
+);
+
+
+ALTER TABLE public.sc_order OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 16650)
+-- Name: sc_order_crt_by_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_crt_by_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_crt_by_seq OWNER TO postgres;
+
+--
+-- TOC entry 2347 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: sc_order_crt_by_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_crt_by_seq OWNED BY sc_order.crt_by;
+
+
+--
+-- TOC entry 182 (class 1259 OID 16652)
+-- Name: sc_order_fee_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_fee_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_fee_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2348 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: sc_order_fee_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_fee_id_seq OWNED BY sc_order.fee_id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 16654)
+-- Name: sc_order_order_amount_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_order_amount_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_order_amount_seq OWNER TO postgres;
+
+--
+-- TOC entry 2349 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: sc_order_order_amount_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_order_amount_seq OWNED BY sc_order.order_amount;
+
+
+--
+-- TOC entry 184 (class 1259 OID 16656)
+-- Name: sc_order_order_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_order_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_order_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2350 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: sc_order_order_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_order_id_seq OWNED BY sc_order.order_id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 16658)
+-- Name: sc_order_order_qty_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_order_qty_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_order_qty_seq OWNER TO postgres;
+
+--
+-- TOC entry 2351 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: sc_order_order_qty_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_order_qty_seq OWNED BY sc_order.order_qty;
+
+
+--
+-- TOC entry 186 (class 1259 OID 16660)
+-- Name: sc_order_pay_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_pay_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_pay_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2352 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: sc_order_pay_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_pay_id_seq OWNED BY sc_order.pay_id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 16662)
+-- Name: sc_order_std_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_order_std_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_order_std_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2353 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: sc_order_std_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_order_std_id_seq OWNED BY sc_order.std_id;
+
+
+--
+-- TOC entry 188 (class 1259 OID 16664)
+-- Name: sc_payment; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_payment (
+    pay_id integer NOT NULL,
+    pay_amount integer NOT NULL,
+    pay_date date,
+    pay_billno character(1),
+    pay_year character(1),
+    pay_term character(1),
+    pay_status character(1),
+    crt_by integer NOT NULL,
+    crt_date date,
+    sc_id integer NOT NULL,
+    std_id integer NOT NULL
+);
+
+
+ALTER TABLE public.sc_payment OWNER TO postgres;
+
+--
+-- TOC entry 189 (class 1259 OID 16667)
+-- Name: sc_payment_crt_by_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_payment_crt_by_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_payment_crt_by_seq OWNER TO postgres;
+
+--
+-- TOC entry 2354 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: sc_payment_crt_by_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_payment_crt_by_seq OWNED BY sc_payment.crt_by;
+
+
+--
+-- TOC entry 190 (class 1259 OID 16669)
+-- Name: sc_payment_pay_amount_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_payment_pay_amount_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_payment_pay_amount_seq OWNER TO postgres;
+
+--
+-- TOC entry 2355 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: sc_payment_pay_amount_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_payment_pay_amount_seq OWNED BY sc_payment.pay_amount;
+
+
+--
+-- TOC entry 191 (class 1259 OID 16671)
+-- Name: sc_payment_pay_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_payment_pay_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_payment_pay_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2356 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: sc_payment_pay_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_payment_pay_id_seq OWNED BY sc_payment.pay_id;
+
+
+--
+-- TOC entry 192 (class 1259 OID 16673)
+-- Name: sc_payment_sc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_payment_sc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_payment_sc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2357 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: sc_payment_sc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_payment_sc_id_seq OWNED BY sc_payment.sc_id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 16675)
+-- Name: sc_payment_std_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_payment_std_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_payment_std_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2358 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: sc_payment_std_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_payment_std_id_seq OWNED BY sc_payment.std_id;
+
+
+--
+-- TOC entry 194 (class 1259 OID 16677)
+-- Name: sc_school; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_school (
+    sc_id integer NOT NULL,
+    sc_name character(50),
+    sc_address character varying(300),
+    sc_tel character varying(11),
+    crt_date time with time zone
+);
+
+
+ALTER TABLE public.sc_school OWNER TO postgres;
+
+--
+-- TOC entry 195 (class 1259 OID 16680)
+-- Name: sc_school_sc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_school_sc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_school_sc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2359 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: sc_school_sc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_school_sc_id_seq OWNED BY sc_school.sc_id;
+
+
+--
+-- TOC entry 196 (class 1259 OID 16682)
+-- Name: sc_student; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sc_student (
+    std_id integer NOT NULL,
+    std_name character varying(80),
+    std_tel text,
+    std_email text,
+    std_room text,
+    std_pic text,
+    std_fname text,
+    std_ftel text,
+    std_mname text,
+    std_mtel text,
+    std_parentaddress text,
+    sc_id integer NOT NULL,
+    crt_by integer NOT NULL,
+    std_number text,
+    class_id integer NOT NULL,
+    std_antecedent character(20),
+    crt_date character(40),
+    std_provice character(80),
+    std_zipcode character(10)
+);
+
+
+ALTER TABLE public.sc_student OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16688)
+-- Name: sc_student_class_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_student_class_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_student_class_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2360 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: sc_student_class_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_student_class_id_seq OWNED BY sc_student.class_id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 16690)
+-- Name: sc_student_crt_by_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_student_crt_by_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_student_crt_by_seq OWNER TO postgres;
+
+--
+-- TOC entry 2361 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: sc_student_crt_by_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_student_crt_by_seq OWNED BY sc_student.crt_by;
+
+
+--
+-- TOC entry 199 (class 1259 OID 16692)
+-- Name: sc_student_sc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_student_sc_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_student_sc_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2362 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: sc_student_sc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_student_sc_id_seq OWNED BY sc_student.sc_id;
+
+
+--
+-- TOC entry 200 (class 1259 OID 16694)
+-- Name: sc_student_std_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sc_student_std_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sc_student_std_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2363 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: sc_student_std_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sc_student_std_id_seq OWNED BY sc_student.std_id;
+
+
+--
+-- TOC entry 2257 (class 2604 OID 16696)
+-- Name: class_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_class ALTER COLUMN class_id SET DEFAULT nextval('sc_class_class_id_seq'::regclass);
+
+
+--
+-- TOC entry 2258 (class 2604 OID 16697)
+-- Name: fee_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_fee ALTER COLUMN fee_id SET DEFAULT nextval('sc_fee_fee_id_seq'::regclass);
+
+
+--
+-- TOC entry 2259 (class 2604 OID 16698)
+-- Name: fee_amount; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_fee ALTER COLUMN fee_amount SET DEFAULT nextval('sc_fee_fee_amount_seq'::regclass);
+
+
+--
+-- TOC entry 2260 (class 2604 OID 16699)
+-- Name: sc_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_fee ALTER COLUMN sc_id SET DEFAULT nextval('sc_fee_sc_id_seq'::regclass);
+
+
+--
+-- TOC entry 2261 (class 2604 OID 16700)
+-- Name: crt_by; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_fee ALTER COLUMN crt_by SET DEFAULT nextval('sc_fee_crt_by_seq'::regclass);
+
+
+--
+-- TOC entry 2262 (class 2604 OID 16701)
+-- Name: crt_date; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_fee ALTER COLUMN crt_date SET DEFAULT nextval('sc_fee_crt_date_seq'::regclass);
+
+
+--
+-- TOC entry 2263 (class 2604 OID 16702)
+-- Name: mem_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_member ALTER COLUMN mem_id SET DEFAULT nextval('sc_member_mem_id_seq'::regclass);
+
+
+--
+-- TOC entry 2264 (class 2604 OID 16703)
+-- Name: crt_by; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_member ALTER COLUMN crt_by SET DEFAULT nextval('sc_member_crt_by_seq'::regclass);
+
+
+--
+-- TOC entry 2265 (class 2604 OID 16704)
+-- Name: sc_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_member ALTER COLUMN sc_id SET DEFAULT nextval('sc_member_sc_id_seq'::regclass);
+
+
+--
+-- TOC entry 2266 (class 2604 OID 16705)
+-- Name: order_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN order_id SET DEFAULT nextval('sc_order_order_id_seq'::regclass);
+
+
+--
+-- TOC entry 2267 (class 2604 OID 16706)
+-- Name: order_amount; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN order_amount SET DEFAULT nextval('sc_order_order_amount_seq'::regclass);
+
+
+--
+-- TOC entry 2268 (class 2604 OID 16707)
+-- Name: order_qty; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN order_qty SET DEFAULT nextval('sc_order_order_qty_seq'::regclass);
+
+
+--
+-- TOC entry 2269 (class 2604 OID 16708)
+-- Name: std_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN std_id SET DEFAULT nextval('sc_order_std_id_seq'::regclass);
+
+
+--
+-- TOC entry 2270 (class 2604 OID 16709)
+-- Name: fee_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN fee_id SET DEFAULT nextval('sc_order_fee_id_seq'::regclass);
+
+
+--
+-- TOC entry 2271 (class 2604 OID 16710)
+-- Name: pay_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN pay_id SET DEFAULT nextval('sc_order_pay_id_seq'::regclass);
+
+
+--
+-- TOC entry 2272 (class 2604 OID 16711)
+-- Name: crt_by; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_order ALTER COLUMN crt_by SET DEFAULT nextval('sc_order_crt_by_seq'::regclass);
+
+
+--
+-- TOC entry 2273 (class 2604 OID 16712)
+-- Name: pay_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_payment ALTER COLUMN pay_id SET DEFAULT nextval('sc_payment_pay_id_seq'::regclass);
+
+
+--
+-- TOC entry 2274 (class 2604 OID 16713)
+-- Name: pay_amount; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_payment ALTER COLUMN pay_amount SET DEFAULT nextval('sc_payment_pay_amount_seq'::regclass);
+
+
+--
+-- TOC entry 2275 (class 2604 OID 16714)
+-- Name: crt_by; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_payment ALTER COLUMN crt_by SET DEFAULT nextval('sc_payment_crt_by_seq'::regclass);
+
+
+--
+-- TOC entry 2276 (class 2604 OID 16715)
+-- Name: sc_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_payment ALTER COLUMN sc_id SET DEFAULT nextval('sc_payment_sc_id_seq'::regclass);
+
+
+--
+-- TOC entry 2277 (class 2604 OID 16716)
+-- Name: std_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_payment ALTER COLUMN std_id SET DEFAULT nextval('sc_payment_std_id_seq'::regclass);
+
+
+--
+-- TOC entry 2278 (class 2604 OID 16717)
+-- Name: sc_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_school ALTER COLUMN sc_id SET DEFAULT nextval('sc_school_sc_id_seq'::regclass);
+
+
+--
+-- TOC entry 2279 (class 2604 OID 16718)
+-- Name: std_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_student ALTER COLUMN std_id SET DEFAULT nextval('sc_student_std_id_seq'::regclass);
+
+
+--
+-- TOC entry 2280 (class 2604 OID 16719)
+-- Name: sc_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_student ALTER COLUMN sc_id SET DEFAULT nextval('sc_student_sc_id_seq'::regclass);
+
+
+--
+-- TOC entry 2281 (class 2604 OID 16720)
+-- Name: crt_by; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_student ALTER COLUMN crt_by SET DEFAULT nextval('sc_student_crt_by_seq'::regclass);
+
+
+--
+-- TOC entry 2282 (class 2604 OID 16721)
+-- Name: class_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sc_student ALTER COLUMN class_id SET DEFAULT nextval('sc_student_class_id_seq'::regclass);
+
+
+--
+-- TOC entry 2297 (class 0 OID 16620)
+-- Dependencies: 168
+-- Data for Name: sc_class; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_class (class_id, class_name) FROM stdin;
+1	อนุบาล 1                                                                        
+2	อนุบาล 2                                                                        
+3	อนุบาล 3                                                                        
+4	ประถมศึกษาปีที่ 1                                                               
+5	ประถมศึกษาปีที่ 2                                                               
+6	ประถมศึกษาปีที่ 3                                                               
+7	ประถมศึกษาปีที่ 4                                                               
+8	ประถมศึกษาปีที่ 5                                                               
+9	ประถมศึกษาปีที่ 6                                                               
+10	มัธยมศึกษาปีที่ 1                                                               
+11	มัธยมศึกษาปีที่ 2                                                               
+12	มัธยมศึกษาปีที่ 3                                                               
+13	มัธยมศึกษาปีที่ 4                                                               
+14	มัธยมศึกษาปีที่ 5                                                               
+15	มัธยมศึกษาปีที่ 6                                                               
+\.
+
+
+--
+-- TOC entry 2364 (class 0 OID 0)
+-- Dependencies: 169
+-- Name: sc_class_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_class_class_id_seq', 15, true);
+
+
+--
+-- TOC entry 2299 (class 0 OID 16625)
+-- Dependencies: 170
+-- Data for Name: sc_fee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_fee (fee_id, fee_name, fee_amount, sc_id, crt_by, crt_date, "Fee_defalt") FROM stdin;
+\.
+
+
+--
+-- TOC entry 2365 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: sc_fee_crt_by_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_fee_crt_by_seq', 1, false);
+
+
+--
+-- TOC entry 2366 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: sc_fee_crt_date_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_fee_crt_date_seq', 1, false);
+
+
+--
+-- TOC entry 2367 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: sc_fee_fee_amount_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_fee_fee_amount_seq', 1, false);
+
+
+--
+-- TOC entry 2368 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: sc_fee_fee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_fee_fee_id_seq', 1, false);
+
+
+--
+-- TOC entry 2369 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: sc_fee_sc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_fee_sc_id_seq', 1, false);
+
+
+--
+-- TOC entry 2305 (class 0 OID 16638)
+-- Dependencies: 176
+-- Data for Name: sc_member; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_member (mem_id, mem_user, mem_pass, mem_name, mem_email, mem_tel, mem_status, crt_by, crt_date, sc_id) FROM stdin;
+6	admin	d033e22ae348aeb5660fc2140aec35850c4da997	admin	admin@admin.com	23131	\N	6	2013-08-29	4
+\.
+
+
+--
+-- TOC entry 2370 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: sc_member_crt_by_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_member_crt_by_seq', 9, true);
+
+
+--
+-- TOC entry 2371 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: sc_member_mem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_member_mem_id_seq', 9, true);
+
+
+--
+-- TOC entry 2372 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: sc_member_sc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_member_sc_id_seq', 4, true);
+
+
+--
+-- TOC entry 2309 (class 0 OID 16647)
+-- Dependencies: 180
+-- Data for Name: sc_order; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_order (order_id, order_amount, order_date, order_qty, order_status, std_id, fee_id, pay_id, crt_by, crt_date) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2373 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: sc_order_crt_by_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_crt_by_seq', 1, false);
+
+
+--
+-- TOC entry 2374 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: sc_order_fee_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_fee_id_seq', 1, false);
+
+
+--
+-- TOC entry 2375 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: sc_order_order_amount_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_order_amount_seq', 1, false);
+
+
+--
+-- TOC entry 2376 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: sc_order_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_order_id_seq', 1, false);
+
+
+--
+-- TOC entry 2377 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: sc_order_order_qty_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_order_qty_seq', 1, false);
+
+
+--
+-- TOC entry 2378 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: sc_order_pay_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_pay_id_seq', 1, false);
+
+
+--
+-- TOC entry 2379 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: sc_order_std_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_order_std_id_seq', 1, false);
+
+
+--
+-- TOC entry 2317 (class 0 OID 16664)
+-- Dependencies: 188
+-- Data for Name: sc_payment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_payment (pay_id, pay_amount, pay_date, pay_billno, pay_year, pay_term, pay_status, crt_by, crt_date, sc_id, std_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2380 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: sc_payment_crt_by_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_payment_crt_by_seq', 1, false);
+
+
+--
+-- TOC entry 2381 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: sc_payment_pay_amount_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_payment_pay_amount_seq', 1, false);
+
+
+--
+-- TOC entry 2382 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: sc_payment_pay_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_payment_pay_id_seq', 1, false);
+
+
+--
+-- TOC entry 2383 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: sc_payment_sc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_payment_sc_id_seq', 1, false);
+
+
+--
+-- TOC entry 2384 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: sc_payment_std_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_payment_std_id_seq', 1, false);
+
+
+--
+-- TOC entry 2323 (class 0 OID 16677)
+-- Dependencies: 194
+-- Data for Name: sc_school; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_school (sc_id, sc_name, sc_address, sc_tel, crt_date) FROM stdin;
+2	โรงเรียนอนุบาลเทศบาล                              	222222	191	\N
+1	โรงเรียนขอนแก่นวิทยายน                            	2222	043	18:19:57.97623+07
+3	โรงเรียนขามแก่นนคร                                	dsada	dsadas	18:20:08.913002+07
+4	โรงเรียนบ้านนา                                    	dsadas	dsadas	08:59:05.69982+07
+\.
+
+
+--
+-- TOC entry 2385 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: sc_school_sc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_school_sc_id_seq', 6, true);
+
+
+--
+-- TOC entry 2325 (class 0 OID 16682)
+-- Dependencies: 196
+-- Data for Name: sc_student; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sc_student (std_id, std_name, std_tel, std_email, std_room, std_pic, std_fname, std_ftel, std_mname, std_mtel, std_parentaddress, sc_id, crt_by, std_number, class_id, std_antecedent, crt_date, std_provice, std_zipcode) FROM stdin;
+85	yyy	8885555555	sdfsfs@hotmail.vvv	1/3	\N	yyy	8888888888	yyy	0876787654	65656	2	4	888	4	girl                	2013-08-28 14:24:43.204+07              	yyy                                                                             	55656     
+83	7777	1111111111	mon@hotmail.com	1/1	\N	111	1111111111	111	0000000000	111	2	4	7777	4	boy                 	2013-08-28 14:26:09.181+07              	1111                                                                            	1111      
+84	454545	4545454545	sdfsfs@hotmail.vvv	1/2	\N	4545	4545454545	45454	4545454545	4545454	2	6	45454545	4	girl                	2013-08-28 14:21:56.078+07              	545454                                                                          	4545      
+87	dsasadads	7584958674	d0dz@d0dz.com	8	\N	ndslknfkds	0000000986	fdnslkfndslkfnslk	0986475893	dsadasdsaada	4	0	5000000	13	girl                	2013-08-28 18:41:29.980436+07           	dsadasdas                                                                       	40000     
+88	6656565	7584958674	d0dz@d0dz.com	86755	\N	ndslknfkds	0000000986	fdnslkfndslkfnslk	0986475893	r4esfesefs	4	0	5000000	3	girl                	2013-08-28 18:53:09.871083+07           	dsadasdas                                                                       	40000     
+\.
+
+
+--
+-- TOC entry 2386 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: sc_student_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_student_class_id_seq', 57, true);
+
+
+--
+-- TOC entry 2387 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: sc_student_crt_by_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_student_crt_by_seq', 67, true);
+
+
+--
+-- TOC entry 2388 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: sc_student_sc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_student_sc_id_seq', 71, true);
+
+
+--
+-- TOC entry 2389 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: sc_student_std_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sc_student_std_id_seq', 90, true);
+
+
+--
+-- TOC entry 2284 (class 2606 OID 16723)
+-- Name: sc_class_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_class
+    ADD CONSTRAINT sc_class_pkey PRIMARY KEY (class_id);
+
+
+--
+-- TOC entry 2286 (class 2606 OID 16725)
+-- Name: sc_fee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_fee
+    ADD CONSTRAINT sc_fee_pkey PRIMARY KEY (fee_id);
+
+
+--
+-- TOC entry 2288 (class 2606 OID 16727)
+-- Name: sc_member_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_member
+    ADD CONSTRAINT sc_member_pkey PRIMARY KEY (mem_id);
+
+
+--
+-- TOC entry 2290 (class 2606 OID 16729)
+-- Name: sc_order_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_order
+    ADD CONSTRAINT sc_order_pkey PRIMARY KEY (order_id);
+
+
+--
+-- TOC entry 2292 (class 2606 OID 16731)
+-- Name: sc_payment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_payment
+    ADD CONSTRAINT sc_payment_pkey PRIMARY KEY (pay_id);
+
+
+--
+-- TOC entry 2294 (class 2606 OID 16733)
+-- Name: sc_school_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_school
+    ADD CONSTRAINT sc_school_pkey PRIMARY KEY (sc_id);
+
+
+--
+-- TOC entry 2296 (class 2606 OID 16735)
+-- Name: sc_student_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sc_student
+    ADD CONSTRAINT sc_student_pkey PRIMARY KEY (std_id);
+
+
+--
+-- TOC entry 2336 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-08-29 10:04:09 ICT
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -6,8 +6,9 @@
 			parent::__construct();
 			$this->load->model('students_model');
 
-			// 	if($this->session->userdata('logged_in'))
-			// redirect('members');
+		if(!$this->session->userdata('logged_in')){
+			redirect('auth/index');
+		}
 		
 		}
 		
@@ -15,13 +16,13 @@
 		public function index()
 		{
 				 
-        if($this->session->userdata('mem_id')||$this->session->userdata('sc_id')){
+        // if($this->session->userdata('mem_id')||$this->session->userdata('sc_id')){
  
-        }else{
-            redirect('members/login');
-        }
+        // }else{
+        //     redirect('members/login');
+        // }
 
-			$data = $this->students_model->students_show($this->session->userdata('mem_id'),$this->session->userdata('sc_id'));
+			// $data = $this->students_model->students_show($this->session->userdata('mem_id'),$this->session->userdata('sc_id'));
 			$data['query'] = $this->students_model->students_show();
 			$this->load->view('student/students_main' ,$data);
 

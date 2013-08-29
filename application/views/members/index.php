@@ -12,7 +12,7 @@ float:right;
 
 }
 </style>
-<div class="right"><?php echo anchor('members/register/', '<img src="'.base_url().'../ci_system/img/add_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>members/register">เพิ่มช้อมูลอาจารย์</a></div>
+<div class="right"><?php echo anchor('members/register/', '<img src="'.base_url().'../ci_system_copy/img/add_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>members/register">เพิ่มช้อมูลอาจารย์</a></div>
 				
 					<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
 
@@ -44,8 +44,8 @@ float:right;
 									<td align = "center"><?=$r['sc_name']?></td>
 
 									<td align = "center">
-									<?php echo anchor('members/edit/'.$r['mem_id'], '<img src="'.base_url().'../ci_system/img/edit_icon.png" height="25" width="25">'); ?>&nbsp;
-									<?php echo anchor('members/delete/'.$r['mem_id'], '<img src="'.base_url().'../ci_system/img/delete_icon.png" height="25" width="25">',array("onclick"=>"javascript:return confirm('คุณต้องการลบหรือไม่');")) ?>
+									<?php echo anchor('members/edit/'.$r['mem_id'], '<img src="'.base_url().'../ci_system_copy/img/edit_icon.png" height="25" width="25">'); ?>&nbsp;
+									<?php echo anchor('members/delete/'.$r['mem_id'], '<img src="'.base_url().'../ci_system_copy/img/delete_icon.png" height="25" width="25">',array("onclick"=>"javascript:return confirm('คุณต้องการลบหรือไม่');")) ?>
 
 									</td>
 									</tr>

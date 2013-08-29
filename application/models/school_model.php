@@ -18,7 +18,7 @@ class School_model extends CI_model{
 
 	function insert($data){
 		$this->db->insert('sc_school',$data);
-		$result = $this->db->get_where('sc_school',$data,1);
+		$result = $this->db->get_where('sc_school',$data);
 		return $result->row()->sc_id;
 	}
 

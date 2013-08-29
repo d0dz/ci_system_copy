@@ -18,7 +18,7 @@ class Member_model extends CI_Model{
 	function create_member($data){
 
 		$this->db->insert('sc_member',$data);
-		$result = $this->db->get_where('sc_member',$data,1);
+		$result = $this->db->get_where('sc_member',$data);
 		return $result->row()->mem_id;
 	}
 

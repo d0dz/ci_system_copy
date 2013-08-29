@@ -9,14 +9,14 @@
 					
 					<?php 
 					
-							echo "<center>";
+							/*echo "<center>";
 							echo "<h4>";
 							 foreach($query as $row){}
 								echo 'ยินดีต้อนรับ  : '. $row->sc_name;
 								echo '<br>';
 								//echo 'ผู้ใช้งาน : คุณ'.$row->mem_name;
 								echo "<h4>";
-						echo"</center>";
+						echo"</center>";*/
 					?>
 					
 					
@@ -48,7 +48,7 @@
 				<?php 
 				
 					$no = 1;
-                    if (count($query) == 0) {
+                    if (!isset($query)) {
                         echo "<tr><td colspan='6' align='center'>---no data--</td></tr>";
 						
 					
@@ -66,8 +66,8 @@
 					echo "<td align='center'>". $row->class_name . "</td>";
 					echo "<td align='center'>". $row->std_room ."</td>";
 					echo "<td>";
-					echo anchor("students/edit/".$row->std_id,"<img src='".base_url()."../ci_system/img/edit_icon.png'  width='25' height='25' title='แก้ไขข้อมูล'>") . "&nbsp" . "&nbsp" . "&nbsp" . "&nbsp" . "&nbsp";
-                    echo anchor("students/del/".$row->std_id, "<img src='".base_url()."../ci_system/img/delete_icon.png'  width='25' height='25' title='ลบข้อมูล'>",array("onclick"=>"javascript:return confirm('คุณต้องการลบหรือไม่');"));
+					echo anchor("students/edit/".$row->std_id,"<img src='".base_url()."../ci_system_copy/img/edit_icon.png'  width='25' height='25' title='แก้ไขข้อมูล'>") . "&nbsp" . "&nbsp" . "&nbsp" . "&nbsp" . "&nbsp";
+                    echo anchor("students/del/".$row->std_id, "<img src='".base_url()."../ci_system_copy/img/delete_icon.png'  width='25' height='25' title='ลบข้อมูล'>",array("onclick"=>"javascript:return confirm('คุณต้องการลบหรือไม่');"));
 					echo "</td>";
 					echo "</tr>";
 					$no++;

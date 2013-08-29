@@ -8,15 +8,6 @@ class Login_model extends CI_Model{
 
 	public function login($mem_user, $mem_pass){
 
-		// $where=array(
-		// 	'mem_user'=>$mem_user,
-		// 	'mem_pass'=>sha1($mem_pass),
-			
-		// );
-		// $this->db->select()->from('members')->where($where);
-		// $query=$this->db->get();
-		// return $query->first_row('array');
-
 		$this->db->select('*');
 		$this->db->from('sc_member');
 		$this->db->where('mem_user',$mem_user);

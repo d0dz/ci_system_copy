@@ -24,15 +24,18 @@
 		</div>
 		<div class="span12">
 
-		<?php if($this->session->userdata('logged_in')){ ?>
-		<?php echo anchor('students/', '<img src="'.base_url().'../ci_system/img/User-Group-icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>students/">ข้อมูลนักเรียน</a>
-		<?php echo anchor('members/', '<img src="'.base_url().'../ci_system/img/user1.png" height="35" width="35">'); ?><a href="<?=base_url()?>members/">ข้อมูลอาจารย์</a>
-		<?php echo anchor('schools/', '<img src="'.base_url().'../ci_system/img/school_icon_512.png" height="35" width="35">'); ?><a href="<?=base_url()?>schools/">ข้อมูลโรงเรียน</a>
-		<?php echo anchor('auth/logout/', '<img src="'.base_url().'../ci_system/img/logout_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>auth/logout">Logout</a>
-		<? }else{ ?>
-		<!-- <p><a href="<?=base_url()?>members/login">Login</a></p> -->
+			<?php if($this->session->userdata('mem_status')=='1'){ ?>
+			<?php echo anchor('students/', '<img src="'.base_url().'../ci_system_copy/img/User-Group-icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>students/">ข้อมูลนักเรียน</a>
+			<?php echo anchor('members/', '<img src="'.base_url().'../ci_system_copy/img/user1.png" height="35" width="35">'); ?><a href="<?=base_url()?>members/">ข้อมูลอาจารย์</a>
+			<?php echo anchor('schools/', '<img src="'.base_url().'../ci_system_copy/img/school_icon_512.png" height="35" width="35">'); ?><a href="<?=base_url()?>schools/">ข้อมูลโรงเรียน</a>
+			<?php echo anchor('auth/logout/', '<img src="'.base_url().'../ci_system_copy/img/logout_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>auth/logout">Logout</a>
+			<? }else if($this->session->userdata('mem_status')=='2') { ?>
+			<?php echo anchor('students/', '<img src="'.base_url().'../ci_system_copy/img/User-Group-icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>students/">ข้อมูลนักเรียน</a>
+			<?php echo anchor('members/', '<img src="'.base_url().'../ci_system_copy/img/user1.png" height="35" width="35">'); ?><a href="<?=base_url()?>members/">ข้อมูลอาจารย์</a>
+			<?php echo anchor('auth/logout/', '<img src="'.base_url().'../ci_system_copy/img/logout_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>auth/logout">Logout</a>
 
-		<?}?>
-
+			<?}else{?>
+			
+			<? } ?>
 		</div>				
 	</div>

@@ -8,9 +8,8 @@
 				
 				<center>
 
-					<?php if($success==1){?>
-
-					<div class="alert alert-success">Update Success!</div>
+					<?php if($errors){ ?>
+						<div class="alert alert-error"><?=$errors?></div>
 					<? } ?>
 
 					<form action="<?=base_url()?>schools/edit/<?=$school['sc_id']?>" method="post">

@@ -13,10 +13,11 @@
 			$this->db->select('*');
 			$this->db->from('sc_student');
 			$this->db->join('sc_class', 'sc_student.class_id = sc_class.class_id');
-			// $this->db->join('sc_member', 'sc_student.crt_by = sc_member.mem_id');
+			// $this->db->join('sc_member', 'sc_member.mem_id = sc_student.crt_by');
 			$this->db->join('sc_school', 'sc_school.sc_id = sc_student.sc_id');
 			//$this->db->where('sc_student.crt_by',$this->session->userdata('mem_id'));
-			$this->db->where('sc_student.sc_id',$this->session->userdata('sc_id'));  
+			$this->db->where('sc_student.sc_id',$this->session->userdata('sc_id'));
+			// $this->db->where('sc_member.mem_id',$this->session->userdate('mem_id'));
 			
 			//$this->db->join('sc_school', 'sc_school.sc_id = sc_student.sc_id');
 			
