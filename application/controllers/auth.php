@@ -45,6 +45,7 @@ class Auth extends CI_Controller{
 					'mem_user' =>$result->mem_user,
 					'sc_id'=> $result->sc_id,
 					'mem_status' => $result->mem_status,
+					'mem_id'=>$result->mem_id,
 					'logged_in' => true
 					);
 				$this->session->set_userdata($sess_array);
