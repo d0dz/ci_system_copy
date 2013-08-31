@@ -6,70 +6,116 @@
 
 	}
 </style>
+
 <body id="dt_example" class="ex_highlight_row">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
 				<div class="well">
+					<center><div><h3>ออกใบเสร็จ</h3></div></center>
 					<div class="row">
 						<div class="span8">
+
 							<p>ค้นหานักเรียน : ชื่อ , รหัส</p>
-							<form class="form-search">
-								<input type="text" class="input-medium search-query">
+
+							<form action="<?php echo site_url('payments/search_keyword');?>" method = "post" class="form-search">
+								<input type="text" name = "keyword" class="input-medium search-query">
 								<button type="submit" class="btn">ค้นหา</button>
 							</form>
-							<p>ออกใบเสร็จ เด็กชาย xxxxxxxx</p>
-							<p>รหัสนักศึกษา : xxxxxx</p>
-							<p><button class="btn btn-large btn-primary" type="button">เพิ่มค่าธรรมเนียม</button></p>
-						
-							<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
-
-						<thead>
-							<tr>
-								<th>ลำดับ</th>
-								<th>ชื่อ</th>
-								<th>อีเมลล์</th>
-								<th>เบอร์โทร</th>
-								<th>รร.</th>
-								<th>ปรับแต่ง</th>
-							</tr>
-						</thead>
-						<tbody>
-							 
 							<?php
-							if(!isset($members)){
+							if(!isset($key)){
 								
+
+							}
+
+							else if($key == null) {
+								echo "ไม่มีนักเรียนชื่อนี้";
+
 							}else{
-								$no=1;
-								foreach($members as $r){
-								?>	
+								foreach($key as $row){
+									?>
+									<table>
+										<tr>
+											<td><h4><?php echo $row->std_antecedent?>&nbsp;</h4></td>
+											<td><h4><?php echo $row->std_name?>&nbsp;&nbsp;&nbsp;</h4></td>
+											<td><h4>รหัสนักเรียน&nbsp;&nbsp;</h4></td>
+											<td><h4><?php echo $row->std_number?></h4></td>
+										</tr>
+									</table>
 
-									<tr>
-									<td align="center"><?=$no?></td>
-									<td><!--<a href="<?=base_url()?>members/member/<?=$r['mem_id']?>">--><?=$r['mem_name']?><!--</a>--></td>
-									<td><?=$r['mem_email']?></td>
-									<td align = "center"><?=$r['mem_tel']?></td>
-									<td align = "center"><?=$r['sc_name']?></td>
-
-									<td align = "center">
-									<?php echo anchor('members/edit/'.$r['mem_id'], '<img src="'.base_url().'../ci_system_copy/img/edit_icon.png" height="25" width="25">'); ?>&nbsp;
-									<?php echo anchor('members/delete/'.$r['mem_id'], '<img src="'.base_url().'../ci_system_copy/img/delete_icon.png" height="25" width="25">',array("onclick"=>"javascript:return confirm('คุณต้องการลบหรือไม่');")) ?>
-
-									</td>
-									</tr>
-									<?php
-									$no++;
+									<?php   
 								}
 							}
 							?>
-							
-						</tbody>
-				</table>
+
+							<div><input class="btn2 btn-large btn-primary" name="addfee" type="button" value="เพิ่มค่าธรรมเนียม"/></div><br>
+
+							<div id="dialog" style="display:none;">
+
+								<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
+									<thead>
+										<tr>
+											<th>ลำดับ</th>
+											<th>รายการ</th>
+											<th>จำนวน(บาท)</th>
+											<th>เลือกรายการ</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<?php
+										if(!isset($fee)){
+											
+										}else{
+											$no=1;
+											foreach($fee as $r){
+												?>	
+
+												<tr>
+													<td align="center"><?=$no?></td>
+													<td><?=$r['fee_name']?></td>
+													<td align = "center"><?=$r['fee_amount']?></td>
+													<td align = "center">
+													<input type="checkbox" id="feechk_<?=$r['fee_id'];?>" value='check'>
+										
+													
+													</td>
+													<td>
+														<input type="hidden" value='<?=$r['fee_id'];?>'>	
+													</td>
+												</tr>
+												<?php
+												$no++;
+											}
+										}
+										?>
+
+									</tbody>
+								</table>
+
+							</div>  <!-- end dialog -->
+
+
+							<table cellpadding="0" cellspacing="0" border="0" class="display" width="100%" id="mainTable">
+								<caption><h4>ชื่อรายการ</h4></caption>
+								<thead>
+									<tr>
+										<th>รายการที่</th>
+										<th>ชื่อรายการ</th>
+										<th>จำนวน</th>
+										<th>ราคา</th>
+									</tr>
+								</thead>
+								<tbody class="table table-hover">
+	
+								</tbody>
+							</table>
 
 
 						</div>
 
-						<div class="right">
+						<div class="4" style="float: right;">
 							<p><?php  
 								$_month_name = array("01"=>"มกราคม",  "02"=>"กุมภาพันธ์",  "03"=>"มีนาคม",    
 									"04"=>"เมษายน",  "05"=>"พฤษภาคม",  "06"=>"มิถุนายน",    
@@ -87,33 +133,33 @@
 								?></p>
 
 								<p>เลขที่ออกใบเสร็จ : Auto</p>
-								<p>รวมมลูค่า <span class="input-small uneditable-input">xx,xxx บาท</span></p>
+								<p><h4>รวมมลูค่า : <span id='sumTxt'></span></h4></p>
 								<p>ปีการศึกษา &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ภาคเรียนที่</p>
 								<p>
-								<select class="span2">
-								<option>- -</option>
-								<option><?=$yy+5?></option>
-								<option><?=$yy+4?></option>
-								<option><?=$yy+3?></option>
-								<option><?=$yy+2?></option>
-								<option><?=$yy+1?></option>
-								<option><?=$yy?></option>
-								<option><?=$yy-1?></option>
-								<option><?=$yy-2?></option>
-								<option><?=$yy-3?></option>
-								<option><?=$yy-4?></option>
-								<option><?=$yy-5?></option>
-								<!-- <option>m</option> -->
-								</select>
+									<select class="span2">
+										<option>- -</option>
+										<option><?=$yy+5?></option>
+										<option><?=$yy+4?></option>
+										<option><?=$yy+3?></option>
+										<option><?=$yy+2?></option>
+										<option><?=$yy+1?></option>
+										<option><?=$yy?></option>
+										<option><?=$yy-1?></option>
+										<option><?=$yy-2?></option>
+										<option><?=$yy-3?></option>
+										<option><?=$yy-4?></option>
+										<option><?=$yy-5?></option>
+										<!-- <option>m</option> -->
+									</select>
 
-								<select class="span1">
-								<option>- -</option>
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								</select>
+									<select class="span1">
+										<option>- -</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
 								</p>
-								<p><p><button class="btn btn-large btn-primary" type="button">พิมพ์ใบเสร็จ</button></p></p>
+								<p><button class="btn btn-large btn-primary" type="button">พิมพ์ใบเสร็จ</button></p>
 							</div>
 						</div>
 

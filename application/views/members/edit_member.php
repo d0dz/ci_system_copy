@@ -38,7 +38,8 @@
 						</p>
 						
 						
-						<input type="submit" value="Edit Member">
+						<input class="btn large btn-primary" type="submit" value="บันทึก">
+						&nbsp;<?php echo anchor("members","ยกเลิก",'class="btn large btn-primary"');?>
 					</form>
 				</center>
 

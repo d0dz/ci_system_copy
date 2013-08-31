@@ -164,7 +164,7 @@
 				if($this->input->post("btsave")!=null){
 			
 				$ar=array(
-				 	//"std_antecedent" =>  $this->input->post("txt_antecedent"),
+				 	"std_antecedent" =>  $this->input->post("txt_antecedent"),
 				 	"std_name" =>  $this->input->post("txt_name"),
                     "std_number" =>  $this->input->post("txt_number"),
                      "std_tel" =>  $this->input->post("txt_tel"),

@@ -37,8 +37,8 @@ float:right;
 <div class="right"><?php echo anchor('fee/new_fee/', '<img src="'.base_url().'../ci_system_copy/img/add_icon.png" height="35" width="35">'); ?><a href="<?=base_url()?>fee/new_fee">เพิ่มรายการ</a></div>
 
 				
-		
-					<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
+		<center><h3>ข้อมูลค่าธรรมเนียม</h3></center>
+					<table cellpadding="0" cellspacing="0" border="0" class="display" id="example2" width="100%">
 						<thead>
 							<tr>
 								<th>ลำดับ</th>

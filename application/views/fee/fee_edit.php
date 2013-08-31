@@ -29,8 +29,10 @@
 									<tr>
 									  <td height="33" colspan="2">
 								        <div align="center">
-							          <input id="bts" type="submit" name="btsave"  value="บันทึก">
-							          &nbsp;<?php echo anchor("fee","ยกเลิก");?></div></td>
+							          <input class="btn large btn-primary" id="bts" type="submit" name="btsave"  value="บันทึก">
+							          &nbsp;<?php echo anchor("fee","ยกเลิก",'class="btn large btn-primary"');?></div></td>
+
+
 								    </tr>
 									
 						  </table>

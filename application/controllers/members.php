@@ -73,8 +73,8 @@ class Members extends CI_Controller{
 			$frm->set_message("required","กรุณากรอกข้อมูล  %s");
 			$frm->set_message("numeric","กรุณากรอกข้อมูลเป็นตัวเลขเท่านั้น ");
 			$frm->set_message("valid_email","กรุณากรอกอีเมลล์ให้ถูกต้อง เช่น   monXX@hotmail.com");
-			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 10 ตัว  เช่น 087627XXXX");
-			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 9 ตัว  เช่น 087627XXXX");
+			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 9 ตัว  เช่น 087627XXXX");
 			$frm->set_message("greater_than","กรุณาเลือก %s ");
 			// $this->load->library('form_validation');
 			// $this->form_validation->set_rules($config);
@@ -131,7 +131,7 @@ class Members extends CI_Controller{
 				array(
 					'field'=>'mem_tel',
 					'label'=>'Tel',
-					'rules'=>'trim|numeric|required|min_length[10]|max_length[11]'
+					'rules'=>'trim|numeric|required|min_length[9]|max_length[11]'
 					)
 				);
 			$frm->set_rules($config);
@@ -139,8 +139,8 @@ class Members extends CI_Controller{
 			$frm->set_message("required","กรุณากรอกข้อมูล  %s");
 			$frm->set_message("numeric","กรุณากรอกข้อมูลเบอร์โทรเป็นตัวเลขเท่านั้น ");
 			$frm->set_message("valid_email","กรุณากรอกอีเมลล์ให้ถูกต้อง เช่น   monXX@hotmail.com");
-			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 10 ตัว  เช่น 087627XXXX");
-			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 10 ตัว  เช่น 087627XXXX");
+			$frm->set_message("min_length","เบอร์โทรศัพท์ไม่น้อยกว่า 9 ตัว  เช่น 087627XXXX");
+			$frm->set_message("max_length","เบอร์โทรศัพท์ไม่เกิน 9 ตัว  เช่น 087627XXXX");
 			$frm->set_message("greater_than","กรุณาเลือก %s ");
 
 			if ($frm->run()==false){

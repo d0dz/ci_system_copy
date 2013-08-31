@@ -26,8 +26,8 @@
 
 								 	$options = array(
                   							'none'  => 'กรุณาเลือกคำนำหน้า',
-                 							'boy'    => 'เด็กชาย',
-                  							'girl'   => 'เด็กหญิง',                  							
+                 							'เด็กชาย'    => 'เด็กชาย',
+                  							'เด็กหญิง'   => 'เด็กหญิง',                  							
                 							);
 									echo form_dropdown('txt_antecedent', $options );
 									
@@ -152,8 +152,8 @@
 									<tr>
 									  <td height="33" colspan="4">
 								        <div align="center">
-							          <input id="bts" type="submit" name="btsave"  value="บันทึก">
-							          &nbsp;<?php echo anchor("students","ยกเลิก");?></div></td>
+							          <input class="btn large btn-primary" id="bts" type="submit" name="btsave"  value="บันทึก">
+							          &nbsp;<?php echo anchor("students","ยกเลิก",'class="btn large btn-primary"');?></div></td>
 								    </tr>
 									
 						  </table>
